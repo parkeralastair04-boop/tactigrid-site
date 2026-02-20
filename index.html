@@ -6,281 +6,657 @@
 <title>TactiGrid</title>
 
 <style>
-:root{
-  --yellow:#ffd400;
-  --text:#f2f2f2;
-  --muted:#b9b9b9;
-  --shadow:0 25px 60px rgba(0,0,0,.45);
-  --radius:24px;
-}
-
-*{box-sizing:border-box}
-
-body{
-  margin:0;
-  font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
-  color:var(--text);
-  background:
-    radial-gradient(1000px 700px at 20% -10%, rgba(255,212,0,.18), transparent 60%),
-    radial-gradient(1000px 700px at 90% 10%, rgba(255,212,0,.12), transparent 60%),
-    linear-gradient(135deg,#050505 0%,#0c0c0c 45%,#121212 70%,rgba(255,212,0,.06) 100%);
-}
-
-/* ===== Smooth Animations ===== */
-@media (prefers-reduced-motion: no-preference){
-  .fade-in{
-    animation: fadeUp .6s ease both;
+  :root{
+    --bg0:#050505;
+    --bg1:#0b0b0b;
+    --bg2:#121212;
+    --card:#0f0f0f;
+    --stroke: rgba(255,255,255,.10);
+    --stroke2: rgba(255,255,255,.07);
+    --text:#f2f2f2;
+    --muted: rgba(255,255,255,.72);
+    --yellow:#ffd400;
+    --yellow2:#ffea4a;
+    --shadow: 0 22px 60px rgba(0,0,0,.55);
+    --radius: 22px;
+    --radius2: 28px;
+    --max: 1180px;
   }
-  @keyframes fadeUp{
-    from{ opacity:0; transform: translateY(18px); }
-    to{ opacity:1; transform: translateY(0); }
+
+  *{ box-sizing:border-box; }
+  html,body{ height:100%; }
+  body{
+    margin:0;
+    font-family: system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+    color:var(--text);
+    background:
+      radial-gradient(900px 600px at 18% -10%, rgba(255,212,0,.18), transparent 60%),
+      radial-gradient(900px 600px at 90% 10%, rgba(255,212,0,.12), transparent 60%),
+      linear-gradient(135deg, var(--bg0) 0%, var(--bg1) 45%, var(--bg2) 100%);
+    overflow-x:hidden;
   }
-}
 
-/* ===== HEADER ===== */
-.header{
-  position:sticky;
-  top:0;
-  z-index:100;
-  backdrop-filter:blur(10px);
-  background:rgba(0,0,0,.9);
-  border-bottom:1px solid rgba(255,255,255,.06);
-}
+  /* ========= Smooth animations ========= */
+  @media (prefers-reduced-motion: no-preference){
+    .fade-enter{
+      animation: fadeUp .55s ease both;
+    }
+    .stagger > *{
+      animation: fadeUp .65s ease both;
+      animation-delay: var(--d, 0ms);
+    }
+    @keyframes fadeUp{
+      from{ opacity:0; transform: translateY(16px); }
+      to{ opacity:1; transform: translateY(0); }
+    }
+  }
 
-.header-inner{
-  max-width:1200px;
-  margin:auto;
-  padding:28px 24px; /* thicker banner */
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px;
-}
+  /* ========= Header (thicker banner) ========= */
+  .header{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background: rgba(0,0,0,.86);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,.08);
+  }
+  .header-inner{
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 24px 20px; /* thicker */
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+  }
 
-.logo img{
-  height:48px;
-  width:auto;
-  display:block;
-  filter:drop-shadow(0 12px 25px rgba(0,0,0,.4));
-}
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    min-width: 190px;
+  }
+  .brand img{
+    height: 42px;
+    width:auto;
+    display:block;
+    filter: drop-shadow(0 12px 28px rgba(0,0,0,.45));
+  }
+  .brand .fallback{
+    display:none;
+    font-weight: 950;
+    letter-spacing:.2px;
+    font-size: 22px;
+  }
+  .brand .fallback span{ color: var(--yellow); }
 
-/* ===== NAV ===== */
-.nav{
-  display:flex;
-  gap:20px;
-}
+  .nav{
+    display:flex;
+    gap:18px;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+  .nav a{
+    text-decoration:none;
+    color: rgba(255,255,255,.92);
+    font-weight: 850;
+    letter-spacing:.45px;
+    font-size: 12px;
+    text-transform: uppercase;
+    padding: 10px 10px;
+    border-radius: 12px;
+    transition: background .2s ease, transform .2s ease, color .2s ease;
+  }
+  .nav a:hover{
+    background: rgba(255,255,255,.06);
+    transform: translateY(-1px);
+    color: var(--yellow2);
+  }
 
-.nav a{
-  text-decoration:none;
-  color:rgba(255,255,255,.9);
-  font-weight:800;
-  font-size:13px;
-  text-transform:uppercase;
-  letter-spacing:.5px;
-  transition:.2s ease;
-}
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    text-decoration:none;
+    font-weight: 950;
+    letter-spacing:.2px;
+    padding: 12px 18px;
+    border-radius: 14px;
+    border: 1px solid transparent;
+    cursor:pointer;
+    transition: transform .2s ease, filter .2s ease, box-shadow .2s ease, background .2s ease;
+    user-select:none;
+    white-space:nowrap;
+  }
+  .btn:active{ transform: translateY(0px); }
+  .btn-primary{
+    background: var(--yellow);
+    color:#0a0a0a;
+    box-shadow: 0 18px 45px rgba(255,212,0,.18), 0 18px 45px rgba(0,0,0,.45);
+  }
+  .btn-primary:hover{
+    transform: translateY(-2px);
+    filter: brightness(1.03);
+  }
+  .btn-ghost{
+    background: rgba(255,255,255,.06);
+    color: var(--text);
+    border-color: rgba(255,255,255,.10);
+    box-shadow: none;
+  }
+  .btn-ghost:hover{
+    transform: translateY(-2px);
+    background: rgba(255,255,255,.08);
+  }
 
-.nav a:hover{
-  color:var(--yellow);
-}
+  /* ========= Layout ========= */
+  .wrap{
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 20px 80px;
+  }
+  .page{ display:none; }
+  .page.active{ display:block; }
 
-/* ===== BUTTON ===== */
-.btn{
-  background:var(--yellow);
-  color:#000;
-  padding:14px 22px;
-  border-radius:16px;
-  font-weight:900;
-  text-decoration:none;
-  transition:.25s ease;
-  box-shadow:0 15px 35px rgba(255,212,0,.25);
-}
+  /* ========= Hero (close to mockup) ========= */
+  .hero{
+    margin-top: 18px;
+    border-radius: var(--radius2);
+    overflow:hidden;
+    border: 1px solid rgba(255,255,255,.08);
+    box-shadow: var(--shadow);
+    background:
+      linear-gradient(0deg, rgba(0,0,0,.62), rgba(0,0,0,.25)),
+      radial-gradient(900px 450px at 80% 10%, rgba(255,212,0,.12), transparent 60%),
+      url("https://images.unsplash.com/photo-1518091043644-c1d4457512c6?auto=format&fit=crop&w=1600&q=60");
+    background-size: cover;
+    background-position: center;
+  }
+  .hero-inner{
+    padding: 56px 46px;
+    min-height: 320px;
+    display:flex;
+    align-items:center;
+  }
+  .hero-content{
+    max-width: 560px;
+  }
+  .hero h1{
+    margin:0 0 10px;
+    font-size: clamp(30px, 3.2vw, 48px);
+    font-weight: 950;
+    letter-spacing:.2px;
+    line-height:1.08;
+    text-transform: uppercase;
+  }
+  .hero p{
+    margin:0 0 18px;
+    color: rgba(255,255,255,.82);
+    font-weight: 700;
+    line-height:1.55;
+  }
+  .hero-actions{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+  }
 
-.btn:hover{
-  transform:translateY(-2px);
-  filter:brightness(1.05);
-}
+  /* ========= Section headings + dividers like mock ========= */
+  .section{
+    margin-top: 30px;
+    padding: 26px 0 0;
+  }
+  .section-title-row{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    margin: 0 0 14px;
+  }
+  .line{
+    height: 2px;
+    flex: 1;
+    background: rgba(255,255,255,.12);
+  }
+  .section-title{
+    margin:0;
+    font-size: 14px;
+    font-weight: 950;
+    letter-spacing:.8px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.86);
+  }
+  .section-title .accent{ color: var(--yellow); }
 
-/* ===== LAYOUT ===== */
-.container{
-  max-width:1200px;
-  margin:auto;
-  padding:90px 24px;
-}
+  /* ========= 3 feature row ========= */
+  .features-row{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    padding: 18px 0 6px;
+    border-top: 1px solid rgba(255,255,255,.08);
+    border-bottom: 1px solid rgba(255,255,255,.08);
+  }
+  .feature{
+    text-align:center;
+    padding: 14px 10px;
+    font-weight: 850;
+    color: rgba(255,255,255,.86);
+  }
+  .feature small{
+    display:block;
+    margin-top:8px;
+    color: rgba(255,255,255,.62);
+    font-weight: 700;
+  }
 
-.page{ display:none; }
-.page.active{ display:block; }
+  /* ========= Placeholder grid (white boxes) ========= */
+  .placeholder-title-row{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    margin: 18px 0 14px;
+  }
+  .placeholder-title{
+    margin:0;
+    font-size: 12px;
+    letter-spacing:.9px;
+    text-transform: uppercase;
+    font-weight: 950;
+    color: rgba(255,255,255,.86);
+  }
+  .arrow{
+    color: var(--yellow);
+    font-weight: 950;
+    letter-spacing:.8px;
+  }
 
-.hero{
-  display:grid;
-  grid-template-columns:1.1fr .9fr;
-  gap:60px;
-  align-items:center;
-}
+  .box-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-top: 16px;
+  }
+  .white-box{
+    background: #ffffff;
+    border-radius: 6px;
+    height: 84px;
+    box-shadow: 0 14px 26px rgba(0,0,0,.25);
+  }
 
-.hero h1{
-  font-size:56px;
-  margin:0 0 25px;
-  font-weight:950;
-  line-height:1.05;
-}
+  .bottom-cta{
+    text-align:center;
+    padding: 22px 0 8px;
+    color: rgba(255,255,255,.82);
+    font-weight: 750;
+  }
+  .bottom-cta .btn{
+    margin-top: 10px;
+  }
 
-.hero h1 span{ color:var(--yellow); }
+  /* ========= Designer page (close to mock) ========= */
+  .designer-hero{
+    margin-top: 18px;
+    border-radius: var(--radius2);
+    overflow:hidden;
+    border: 1px solid rgba(255,255,255,.08);
+    box-shadow: var(--shadow);
+    background:
+      linear-gradient(0deg, rgba(0,0,0,.68), rgba(0,0,0,.25)),
+      url("https://images.unsplash.com/photo-1521412644187-c49fa049e84d?auto=format&fit=crop&w=1600&q=60");
+    background-size: cover;
+    background-position: center;
+  }
+  .designer-inner{
+    padding: 46px 46px 34px;
+    display:grid;
+    grid-template-columns: 1.05fr .95fr;
+    gap: 26px;
+    align-items:center;
+  }
+  .designer-inner h1{
+    margin:0 0 12px;
+    font-size: clamp(28px, 3vw, 44px);
+    font-weight: 950;
+    letter-spacing:.2px;
+  }
+  .designer-bullets{
+    margin: 14px 0 0;
+    padding-left: 18px;
+    color: rgba(255,255,255,.82);
+    font-weight: 750;
+    line-height: 1.7;
+  }
+  .device-mock{
+    border-radius: 22px;
+    border: 1px solid rgba(255,255,255,.10);
+    background: rgba(0,0,0,.35);
+    height: 240px;
+    position:relative;
+    overflow:hidden;
+  }
+  .device-mock::before{
+    content:"";
+    position:absolute;
+    inset: 18px 18px 18px 18px;
+    border-radius: 16px;
+    border: 2px solid rgba(255,255,255,.14);
+  }
 
-.hero p{
-  font-size:19px;
-  line-height:1.7;
-  color:var(--muted);
-  margin-bottom:30px;
-}
+  .steps{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 18px;
+    padding: 18px 0;
+    border-top: 1px solid rgba(255,255,255,.10);
+  }
+  .step{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    font-weight: 900;
+    color: rgba(255,255,255,.88);
+  }
+  .step .n{
+    font-size: 28px;
+    font-weight: 950;
+    opacity:.9;
+  }
+  .step .t{
+    font-size: 14px;
+    font-weight: 900;
+  }
 
-.card{
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:var(--radius);
-  padding:40px;
-  box-shadow:var(--shadow);
-}
+  .key-features{
+    margin-top: 14px;
+    color: rgba(255,255,255,.9);
+    font-weight: 950;
+    letter-spacing:.4px;
+  }
+  .kf-row{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-top: 12px;
+  }
+  .kf{
+    background: var(--yellow);
+    border-radius: 6px;
+    height: 64px;
+    box-shadow: 0 16px 28px rgba(255,212,0,.14), 0 16px 28px rgba(0,0,0,.35);
+  }
 
-.coming{
-  min-height:60vh;
-  display:grid;
-  place-items:center;
-  text-align:center;
-}
+  /* ========= Coming soon pages ========= */
+  .coming{
+    margin-top: 18px;
+    border-radius: var(--radius2);
+    border: 1px solid rgba(255,255,255,.08);
+    box-shadow: var(--shadow);
+    overflow:hidden;
+    background:
+      linear-gradient(0deg, rgba(0,0,0,.70), rgba(0,0,0,.25)),
+      url("https://images.unsplash.com/photo-1459865264687-595d652de67e?auto=format&fit=crop&w=1600&q=60");
+    background-size: cover;
+    background-position: center;
+  }
+  .coming-inner{
+    min-height: 520px;
+    display:grid;
+    place-items:center;
+    text-align:center;
+    padding: 40px 20px;
+  }
+  .coming-inner h1{
+    margin:0 0 10px;
+    font-size: clamp(34px, 5vw, 58px);
+    font-weight: 950;
+  }
+  .coming-inner p{
+    margin:0;
+    max-width: 56ch;
+    color: rgba(255,255,255,.78);
+    font-weight: 750;
+    line-height: 1.6;
+  }
 
-.coming h2{
-  font-size:clamp(36px,5vw,64px);
-  font-weight:950;
-  margin:0 0 10px;
-}
+  /* ========= Footer ========= */
+  footer{
+    margin-top: 44px;
+    padding: 30px 0 40px;
+    border-top: 1px solid rgba(255,255,255,.08);
+    color: rgba(255,255,255,.60);
+    text-align:center;
+    font-weight: 700;
+  }
 
-.coming p{
-  color:var(--muted);
-  font-weight:600;
-}
-
-/* ===== FOOTER ===== */
-footer{
-  margin-top:120px;
-  padding:50px 20px;
-  border-top:1px solid rgba(255,255,255,.06);
-  text-align:center;
-  color:rgba(255,255,255,.6);
-  font-weight:600;
-}
-
-@media(max-width:1000px){
-  .hero{ grid-template-columns:1fr; }
-  .hero h1{ font-size:40px; }
-  .nav{ display:none; }
-}
+  /* ========= Responsive ========= */
+  @media (max-width: 980px){
+    .nav{ display:none; }
+    .hero-inner{ padding: 42px 18px; }
+    .designer-inner{ grid-template-columns: 1fr; padding: 36px 18px; }
+    .features-row{ grid-template-columns: 1fr; }
+    .box-grid{ grid-template-columns: 1fr; }
+    .steps{ grid-template-columns: 1fr; }
+    .kf-row{ grid-template-columns: 1fr 1fr; }
+    .header-inner{ padding: 20px 16px; }
+    .brand img{ height: 38px; }
+  }
 </style>
 </head>
 
 <body>
 
 <header class="header">
-  <div class="header-inner fade-in">
-
-    <!-- LOGO -->
-    <div class="logo">
-      <img src="logo.png" alt="TactiGrid Logo">
+  <div class="header-inner fade-enter">
+    <div class="brand" aria-label="TactiGrid">
+      <!-- LOGO: must exist in repo as tactigrid-logo.png -->
+      <img src="tactigrid-logo.png" alt="TactiGrid Logo"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+      <div class="fallback">Tacti<span>Grid</span></div>
     </div>
 
-    <nav class="nav">
-      <a href="#home">Home</a>
-      <a href="#portfolios">Portfolios</a>
-      <a href="#challenge">Challenge</a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#designer">DESIGNER</a>
+      <a href="#portfolios">PORTFOLIOS</a>
+      <a href="#challenge">CHALLENGE</a>
     </nav>
 
-    <!-- OPENS DESIGNER IN NEW TAB -->
-    <a class="btn"
+    <!-- Open Designer (NEW TAB) -->
+    <a class="btn btn-primary"
        href="https://designer.tactigrid.com/"
        target="_blank"
        rel="noopener noreferrer">
-       Open Designer
+      Open Designer
     </a>
-
   </div>
 </header>
 
-<main class="container">
+<div class="wrap">
 
-<!-- HOME -->
-<section class="page active" id="page-home">
-  <section class="hero fade-in">
-    <div>
-      <h1><span>TactiGrid</span><br>Coaching Platform</h1>
-      <p>
-        A modern football coaching hub built to support visual planning,
-        drill creation and session design. Launch directly into the Drill Designer and start building.
-      </p>
+  <!-- HOME -->
+  <section class="page active" id="page-home">
 
-      <a class="btn"
-         href="https://designer.tactigrid.com/"
-         target="_blank"
-         rel="noopener noreferrer">
-         Launch Drill Designer
-      </a>
-    </div>
+    <section class="hero fade-enter">
+      <div class="hero-inner">
+        <div class="hero-content">
+          <h1>DESIGN BETTER FOOTBALL SESSIONS</h1>
+          <p>Create, save and share drills in minutes</p>
 
-    <div class="card">
-      <h3 style="margin-top:0;font-weight:900;">Built For Modern Coaches</h3>
-      <p style="margin:0;">
-        Clean. Fast. Professional. Designed to simplify session planning
-        while keeping full creative control.
-      </p>
-    </div>
+          <div class="hero-actions">
+            <!-- Launch Designer (NEW TAB) -->
+            <a class="btn btn-primary"
+               href="https://designer.tactigrid.com/"
+               target="_blank"
+               rel="noopener noreferrer">
+              Open Drill Designer
+            </a>
+
+            <a class="btn btn-ghost" href="#portfolios">
+              View Portfolios
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section fade-enter">
+      <div class="section-title-row">
+        <div class="line"></div>
+        <h3 class="section-title">WHY COACHES CHOOSE <span class="accent">TACTIGRID</span></h3>
+        <div class="line"></div>
+      </div>
+
+      <div class="features-row stagger">
+        <div class="feature" style="--d:0ms">
+          Fast Drill Creation
+          <small>Quickly build sessions visually</small>
+        </div>
+        <div class="feature" style="--d:90ms">
+          Clear Session Planning
+          <small>Structure ideas into a plan</small>
+        </div>
+        <div class="feature" style="--d:180ms">
+          Share with Confidence
+          <small>Export-ready for coaching</small>
+        </div>
+      </div>
+
+      <div class="placeholder-title-row" style="margin-top:22px;">
+        <div class="line"></div>
+        <p class="placeholder-title">
+          FROM MESSY IDEAS <span class="arrow">⟶</span> CLEAR SESSIONS
+        </p>
+        <div class="line"></div>
+      </div>
+
+      <!-- Blank spaces (placeholders) -->
+      <div class="box-grid stagger">
+        <div class="white-box" style="--d:0ms"></div>
+        <div class="white-box" style="--d:80ms"></div>
+        <div class="white-box" style="--d:160ms"></div>
+        <div class="white-box" style="--d:240ms"></div>
+      </div>
+
+      <div class="bottom-cta fade-enter">
+        <div>Start designing your session now</div>
+        <a class="btn btn-primary"
+           href="https://designer.tactigrid.com/"
+           target="_blank"
+           rel="noopener noreferrer">
+          Open Drill Designer
+        </a>
+      </div>
+    </section>
+
   </section>
-</section>
 
-<!-- PORTFOLIOS -->
-<section class="page" id="page-portfolios">
-  <div class="coming fade-in">
-    <div>
-      <h2>Coming Soon</h2>
-      <p>Portfolios are currently in development.</p>
+  <!-- DESIGNER (mockup-style info page, button opens real designer in new tab) -->
+  <section class="page" id="page-designer">
+
+    <section class="designer-hero fade-enter">
+      <div class="designer-inner">
+        <div>
+          <h1>TactiGrid Drill Designer</h1>
+
+          <a class="btn btn-primary"
+             href="https://designer.tactigrid.com/"
+             target="_blank"
+             rel="noopener noreferrer">
+            Launch Designer
+          </a>
+
+          <ul class="designer-bullets">
+            <li>Visual Pitch Builder</li>
+            <li>Custom Lines &amp; Movements</li>
+            <li>Session Notes Included</li>
+            <li>Export Ready</li>
+          </ul>
+        </div>
+
+        <!-- Blank space for device mock imagery -->
+        <div class="device-mock" aria-label="Designer preview placeholder"></div>
+      </div>
+    </section>
+
+    <div class="steps stagger fade-enter">
+      <div class="step" style="--d:0ms"><span class="n">01</span><span class="t">Build Your Drill</span></div>
+      <div class="step" style="--d:90ms"><span class="n">02</span><span class="t">Add To Your Notes</span></div>
+      <div class="step" style="--d:180ms"><span class="n">03</span><span class="t">Share &amp; Export</span></div>
     </div>
-  </div>
-</section>
 
-<!-- CHALLENGE -->
-<section class="page" id="page-challenge">
-  <div class="coming fade-in">
-    <div>
-      <h2>Coming Soon</h2>
-      <p>Challenge scenarios are currently in development.</p>
+    <div class="key-features fade-enter">Key Features</div>
+    <div class="kf-row stagger">
+      <div class="kf" style="--d:0ms"></div>
+      <div class="kf" style="--d:80ms"></div>
+      <div class="kf" style="--d:160ms"></div>
+      <div class="kf" style="--d:240ms"></div>
     </div>
-  </div>
-</section>
 
-</main>
+  </section>
 
-<footer>
-© 2026 TactiGrid — Built for Modern Coaches
-</footer>
+  <!-- PORTFOLIOS (Coming Soon) -->
+  <section class="page" id="page-portfolios">
+    <section class="coming fade-enter">
+      <div class="coming-inner">
+        <div>
+          <h1>Coming Soon</h1>
+          <p>Coaching Portfolios will be added here soon. These blank spaces will become drill libraries, templates, and collections.</p>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <!-- CHALLENGE (Coming Soon) -->
+  <section class="page" id="page-challenge">
+    <section class="coming fade-enter">
+      <div class="coming-inner">
+        <div>
+          <h1>Coming Soon</h1>
+          <p>Challenge Scenarios will be added here soon. This section will include decision-making prompts and coach challenges.</p>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <footer>© 2026 TactiGrid — Built for Modern Coaches</footer>
+
+</div>
 
 <script>
-const pages = {
-  home: document.getElementById('page-home'),
-  portfolios: document.getElementById('page-portfolios'),
-  challenge: document.getElementById('page-challenge')
-};
+  // Simple hash routing (home/designer/portfolios/challenge)
+  const pages = {
+    home: document.getElementById('page-home'),
+    designer: document.getElementById('page-designer'),
+    portfolios: document.getElementById('page-portfolios'),
+    challenge: document.getElementById('page-challenge'),
+  };
 
-function showPage(key){
-  Object.values(pages).forEach(p => p.classList.remove('active'));
-  (pages[key] || pages.home).classList.add('active');
-  window.scrollTo({top:0, behavior:'instant'});
-}
+  function showPage(key){
+    Object.values(pages).forEach(p => p.classList.remove('active'));
 
-function route(){
-  const hash = (location.hash || '#home').replace('#','').trim();
-  showPage(hash);
-}
+    const page = pages[key] || pages.home;
+    page.classList.add('active');
 
-window.addEventListener('hashchange', route);
-route();
+    // retrigger entrance animations on route change (simple + smooth)
+    page.querySelectorAll('.fade-enter, .stagger > *').forEach(el=>{
+      el.style.animation = 'none';
+      // force reflow
+      void el.offsetHeight;
+      el.style.animation = '';
+    });
+
+    window.scrollTo({top:0, behavior:'instant'});
+  }
+
+  function route(){
+    const hash = (location.hash || '#home').replace('#','').trim().toLowerCase();
+    showPage(hash);
+  }
+
+  window.addEventListener('hashchange', route);
+  route();
 </script>
 
 </body>
