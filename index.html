@@ -8,7 +8,6 @@
 <style>
 :root{
   --yellow:#ffd400;
-  --yellow-soft:#ffea4a;
   --text:#f2f2f2;
   --muted:#b9b9b9;
   --shadow:0 25px 60px rgba(0,0,0,.45);
@@ -27,36 +26,65 @@ body{
     linear-gradient(135deg,#050505 0%,#0c0c0c 45%,#121212 70%,rgba(255,212,0,.06) 100%);
 }
 
-/* HEADER */
+/* ===== Smooth Animations ===== */
+@media (prefers-reduced-motion: no-preference){
+  .fade-in{
+    animation: fadeUp .6s ease both;
+  }
+  @keyframes fadeUp{
+    from{ opacity:0; transform: translateY(18px); }
+    to{ opacity:1; transform: translateY(0); }
+  }
+}
+
+/* ===== HEADER ===== */
 .header{
   position:sticky;
   top:0;
   z-index:100;
   backdrop-filter:blur(10px);
-  background:rgba(0,0,0,.85);
+  background:rgba(0,0,0,.9);
   border-bottom:1px solid rgba(255,255,255,.06);
 }
 
 .header-inner{
   max-width:1200px;
   margin:auto;
-  padding:18px 24px;
+  padding:28px 24px; /* thicker banner */
   display:flex;
   align-items:center;
   justify-content:space-between;
+  gap:20px;
 }
 
-.logo{
-  font-weight:900;
-  font-size:24px;
-  letter-spacing:.3px;
+.logo img{
+  height:48px;
+  width:auto;
+  display:block;
+  filter:drop-shadow(0 12px 25px rgba(0,0,0,.4));
 }
 
-.logo span{
+/* ===== NAV ===== */
+.nav{
+  display:flex;
+  gap:20px;
+}
+
+.nav a{
+  text-decoration:none;
+  color:rgba(255,255,255,.9);
+  font-weight:800;
+  font-size:13px;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+  transition:.2s ease;
+}
+
+.nav a:hover{
   color:var(--yellow);
 }
 
-/* BUTTON */
+/* ===== BUTTON ===== */
 .btn{
   background:var(--yellow);
   color:#000;
@@ -73,12 +101,15 @@ body{
   filter:brightness(1.05);
 }
 
-/* HERO */
+/* ===== LAYOUT ===== */
 .container{
   max-width:1200px;
   margin:auto;
   padding:90px 24px;
 }
+
+.page{ display:none; }
+.page.active{ display:block; }
 
 .hero{
   display:grid;
@@ -94,9 +125,7 @@ body{
   line-height:1.05;
 }
 
-.hero h1 span{
-  color:var(--yellow);
-}
+.hero h1 span{ color:var(--yellow); }
 
 .hero p{
   font-size:19px;
@@ -113,39 +142,25 @@ body{
   box-shadow:var(--shadow);
 }
 
-.grid{
-  margin-top:80px;
+.coming{
+  min-height:60vh;
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:30px;
+  place-items:center;
+  text-align:center;
 }
 
-.feature{
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:var(--radius);
-  padding:30px;
-  transition:.3s ease;
+.coming h2{
+  font-size:clamp(36px,5vw,64px);
+  font-weight:950;
+  margin:0 0 10px;
 }
 
-.feature:hover{
-  transform:translateY(-6px);
-  border-color:rgba(255,212,0,.3);
-}
-
-.feature h3{
-  margin:0 0 12px;
-  font-size:20px;
-  font-weight:900;
-}
-
-.feature p{
-  margin:0;
-  font-size:15px;
+.coming p{
   color:var(--muted);
   font-weight:600;
 }
 
+/* ===== FOOTER ===== */
 footer{
   margin-top:120px;
   padding:50px 20px;
@@ -156,18 +171,9 @@ footer{
 }
 
 @media(max-width:1000px){
-  .hero{
-    grid-template-columns:1fr;
-    gap:40px;
-  }
-
-  .hero h1{
-    font-size:40px;
-  }
-
-  .grid{
-    grid-template-columns:1fr;
-  }
+  .hero{ grid-template-columns:1fr; }
+  .hero h1{ font-size:40px; }
+  .nav{ display:none; }
 }
 </style>
 </head>
@@ -175,8 +181,18 @@ footer{
 <body>
 
 <header class="header">
-  <div class="header-inner">
-    <div class="logo">Tacti<span>Grid</span></div>
+  <div class="header-inner fade-in">
+
+    <!-- LOGO -->
+    <div class="logo">
+      <img src="logo.png" alt="TactiGrid Logo">
+    </div>
+
+    <nav class="nav">
+      <a href="#home">Home</a>
+      <a href="#portfolios">Portfolios</a>
+      <a href="#challenge">Challenge</a>
+    </nav>
 
     <!-- OPENS DESIGNER IN NEW TAB -->
     <a class="btn"
@@ -185,62 +201,58 @@ footer{
        rel="noopener noreferrer">
        Open Designer
     </a>
+
   </div>
 </header>
 
 <main class="container">
 
-<section class="hero">
+<!-- HOME -->
+<section class="page active" id="page-home">
+  <section class="hero fade-in">
+    <div>
+      <h1><span>TactiGrid</span><br>Coaching Platform</h1>
+      <p>
+        A modern football coaching hub built to support visual planning,
+        drill creation and session design. Launch directly into the Drill Designer and start building.
+      </p>
 
-<div>
-  <h1><span>TactiGrid</span><br>Coaching Platform</h1>
+      <a class="btn"
+         href="https://designer.tactigrid.com/"
+         target="_blank"
+         rel="noopener noreferrer">
+         Launch Drill Designer
+      </a>
+    </div>
 
-  <p>
-    A modern football coaching hub built to support visual planning,
-    drill creation and session design.
-    Launch directly into the Drill Designer and start building.
-  </p>
-
-  <!-- ALSO OPENS IN NEW TAB -->
-  <a class="btn"
-     href="https://designer.tactigrid.com/"
-     target="_blank"
-     rel="noopener noreferrer">
-     Launch Drill Designer
-  </a>
-
-  <p style="margin-top:20px;font-size:14px;">
-    P.S. This is a free demo hub — feedback is always welcome.
-  </p>
-</div>
-
-<div class="card">
-  <h3 style="margin-top:0;font-weight:900;">Built For Modern Coaches</h3>
-  <p style="color:var(--muted);font-weight:600;">
-    Clean. Fast. Professional.  
-    Designed to simplify session planning while keeping full creative control.
-  </p>
-</div>
-
+    <div class="card">
+      <h3 style="margin-top:0;font-weight:900;">Built For Modern Coaches</h3>
+      <p style="margin:0;">
+        Clean. Fast. Professional. Designed to simplify session planning
+        while keeping full creative control.
+      </p>
+    </div>
+  </section>
 </section>
 
-<section class="grid">
+<!-- PORTFOLIOS -->
+<section class="page" id="page-portfolios">
+  <div class="coming fade-in">
+    <div>
+      <h2>Coming Soon</h2>
+      <p>Portfolios are currently in development.</p>
+    </div>
+  </div>
+</section>
 
-<div class="feature">
-  <h3>Visual Drill Planning</h3>
-  <p>Instant access to your pitch designer with one click.</p>
-</div>
-
-<div class="feature">
-  <h3>Future Portfolios</h3>
-  <p>Save and organise drills as the platform grows.</p>
-</div>
-
-<div class="feature">
-  <h3>Community Driven</h3>
-  <p>Built through feedback from real football coaches.</p>
-</div>
-
+<!-- CHALLENGE -->
+<section class="page" id="page-challenge">
+  <div class="coming fade-in">
+    <div>
+      <h2>Coming Soon</h2>
+      <p>Challenge scenarios are currently in development.</p>
+    </div>
+  </div>
 </section>
 
 </main>
@@ -248,6 +260,28 @@ footer{
 <footer>
 © 2026 TactiGrid — Built for Modern Coaches
 </footer>
+
+<script>
+const pages = {
+  home: document.getElementById('page-home'),
+  portfolios: document.getElementById('page-portfolios'),
+  challenge: document.getElementById('page-challenge')
+};
+
+function showPage(key){
+  Object.values(pages).forEach(p => p.classList.remove('active'));
+  (pages[key] || pages.home).classList.add('active');
+  window.scrollTo({top:0, behavior:'instant'});
+}
+
+function route(){
+  const hash = (location.hash || '#home').replace('#','').trim();
+  showPage(hash);
+}
+
+window.addEventListener('hashchange', route);
+route();
+</script>
 
 </body>
 </html>
