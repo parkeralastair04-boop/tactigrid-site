@@ -68,12 +68,14 @@ body{
   display:flex;
   align-items:center;
   gap:12px;
-  min-width: 240px;
+  min-width: 280px; /* slightly wider so brand feels big */
   text-decoration:none;
   color:inherit;
 }
+
+/* ✅ Logo bigger */
 .brand img{
-  height: 66px;
+  height: 92px; /* was ~66px */
   width:auto;
   display:block;
   filter: drop-shadow(0 12px 28px rgba(0,0,0,.45));
@@ -82,7 +84,7 @@ body{
   display:none;
   font-weight: 950;
   letter-spacing:.2px;
-  font-size: 22px;
+  font-size: 26px;
 }
 .brand .fallback span{ color: var(--yellow); }
 
@@ -394,7 +396,7 @@ footer{
   .grid-3{ grid-template-columns: 1fr; }
   .feed{ grid-template-columns: 1fr; }
   .scenarios{ grid-template-columns: 1fr; }
-  .brand img{ height: 56px; }
+  .brand img{ height: 72px; } /* still bigger on mobile */
 }
 </style>
 </head>
@@ -510,6 +512,49 @@ footer{
       </div>
     </section>
 
+    <!-- ✅ ABOUT US (added) -->
+    <section class="section fade">
+      <div class="title-row">
+        <div class="line"></div>
+        <h3 class="title">About <span class="accent">Us</span></h3>
+        <div class="line"></div>
+      </div>
+
+      <div class="grid-2 stagger">
+        <div class="card" style="--d:0ms">
+          <h3>Why TactiGrid exists</h3>
+          <p>
+            TactiGrid was built to link coaches together and create a real community around session design.
+            When I entered the sector, I found it surprisingly difficult to find the right coaching network —
+            the niche people, the right contacts, and a place to ask questions without feeling lost.
+          </p>
+          <p style="margin-top:12px;">
+            I studied a degree in the game and wanted to reach out to coaches, learn from their experiences,
+            and build my journey properly — but there wasn’t a clear space to do that.
+            Now it’s here: a place to design, share, learn, and improve together.
+          </p>
+        </div>
+
+        <div class="card" style="--d:120ms">
+          <h3>What we’re building</h3>
+          <p>
+            A living library of drills and session ideas — powered by coach portfolios and real feedback from the network.
+            The aim is simple: make planning easier, raise session quality, and help coaches improve faster.
+          </p>
+          <ul class="list">
+            <li>Build drills visually in the designer</li>
+            <li>Share them to the community for feedback</li>
+            <li>Publish your best work into your portfolio</li>
+          </ul>
+          <div class="badges" style="margin-top:12px;">
+            <span class="badge y">Community-first</span>
+            <span class="badge">Coach-led</span>
+            <span class="badge">Always improving</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section fade">
       <div class="title-row">
         <div class="line"></div>
@@ -546,6 +591,32 @@ footer{
       </div>
     </section>
 
+    <!-- ✅ CONTACT US button at bottom of HOME -->
+    <section class="section fade" id="contact">
+      <div class="title-row">
+        <div class="line"></div>
+        <h3 class="title">Contact <span class="accent">Us</span></h3>
+        <div class="line"></div>
+      </div>
+
+      <div class="card">
+        <h3>Want help, feedback, or to submit a drill?</h3>
+        <p>
+          Join the WhatsApp community and message us — drills shared there can be added into the Portfolios section as the library grows.
+        </p>
+
+        <div class="hero-actions" style="margin-top:12px;">
+          <a class="btn btn-primary"
+             href="https://chat.whatsapp.com/LdHYZj8K7gs7zMYlyCTaS6?mode=gi_t"
+             target="_blank"
+             rel="noopener noreferrer">
+            Contact Us
+          </a>
+          <a class="btn btn-ghost" href="#community">Community Page</a>
+        </div>
+      </div>
+    </section>
+
     <footer>© 2026 TactiGrid — Built for Modern Coaches</footer>
   </section>
 
@@ -560,24 +631,25 @@ footer{
 
       <div class="grid-2 stagger">
         <div class="card" style="--d:0ms">
-          <h3>Browse drills from real coaches</h3>
+          <h3>Coach drills will appear here</h3>
           <p>
-            This is a starter “demo feed” to show how portfolios will feel.
-            Soon, coaches will publish their own drill libraries and you’ll be able to follow favourites.
+            Drills created by coaches (including yours) and drills submitted in the WhatsApp chat will appear here
+            as the library grows. When you upload and share them with me, I’ll categorise them properly:
+            age, level, theme, and notes on interventions/scenarios.
           </p>
           <ul class="list">
             <li>Filter by theme, age group, and level</li>
-            <li>Open a drill and copy the idea into your own session</li>
-            <li>Post a drill link to the community for feedback</li>
+            <li>Open in the designer to export and use</li>
+            <li>Provide feedback via the community</li>
           </ul>
         </div>
 
         <div class="card" style="--d:120ms">
-          <h3>Submit your drill to the network</h3>
-          <p>Build one drill, then share it in the WhatsApp group to get suggestions.</p>
+          <h3>Submit a drill</h3>
+          <p>Build one drill, then share it in the WhatsApp group — we’ll grow the portfolio library from there.</p>
           <div class="hero-actions" style="margin-top:12px;">
             <a class="btn btn-primary" href="https://designer.tactigrid.com/" target="_blank" rel="noopener noreferrer">Create a Drill</a>
-            <a class="btn btn-ghost" href="#community">Get Feedback</a>
+            <a class="btn btn-ghost" href="https://chat.whatsapp.com/LdHYZj8K7gs7zMYlyCTaS6?mode=gi_t" target="_blank" rel="noopener noreferrer">Contact / Submit</a>
           </div>
         </div>
       </div>
@@ -619,13 +691,15 @@ footer{
         <div style="color:rgba(255,255,255,.70); font-weight:900;" id="resultCount">—</div>
       </div>
 
+      <!-- Demo drills (placeholders until you provide real links) -->
       <div class="feed stagger" id="portfolioFeed" style="margin-top:14px;">
         <article class="tile" style="--d:0ms" data-title="Quick Finish + Rebound" data-tags="finishing transition shooting" data-age="u12" data-level="grassroots">
           <div class="tileTop"></div>
           <div class="tileBody">
             <h3 style="margin:0 0 6px; font-size:16px; font-weight:950;">Quick Finish + Rebound</h3>
             <p style="margin:0; color:var(--muted); font-weight:750; line-height:1.6;">
-              2-shot sequence: first-time finish then react for a rebound. Great for tempo + composure.
+              Interventions: body shape to finish, first touch out of feet, scan before shot.
+              Scenario: quick rebound reaction after save/deflection.
             </p>
             <div class="meta">
               <span>Theme: Finishing</span><span>Age: U12</span><span>Level: Grassroots</span>
@@ -635,7 +709,7 @@ footer{
             </div>
             <div class="actions">
               <a class="btn btn-primary" href="https://designer.tactigrid.com/" target="_blank" rel="noopener noreferrer">Open in Designer</a>
-              <a class="btn btn-ghost" href="#community">Ask for Feedback</a>
+              <a class="btn btn-ghost" href="https://chat.whatsapp.com/LdHYZj8K7gs7zMYlyCTaS6?mode=gi_t" target="_blank" rel="noopener noreferrer">Provide Feedback</a>
             </div>
           </div>
         </article>
@@ -645,7 +719,8 @@ footer{
           <div class="tileBody">
             <h3 style="margin:0 0 6px; font-size:16px; font-weight:950;">1v1 Gate Attack</h3>
             <p style="margin:0; color:var(--muted); font-weight:750; line-height:1.6;">
-              Attack a gate with speed. Defender scores by winning and countering through the opposite gate.
+              Interventions: change of speed, disguise, body feints, protect the ball.
+              Scenario: attacker must beat defender then finish through a gate.
             </p>
             <div class="meta">
               <span>Theme: 1v1</span><span>Age: U9</span><span>Level: Grassroots</span>
@@ -655,7 +730,7 @@ footer{
             </div>
             <div class="actions">
               <a class="btn btn-primary" href="https://designer.tactigrid.com/" target="_blank" rel="noopener noreferrer">Open in Designer</a>
-              <a class="btn btn-ghost" href="#community">Ask for Feedback</a>
+              <a class="btn btn-ghost" href="https://chat.whatsapp.com/LdHYZj8K7gs7zMYlyCTaS6?mode=gi_t" target="_blank" rel="noopener noreferrer">Provide Feedback</a>
             </div>
           </div>
         </article>
@@ -665,7 +740,8 @@ footer{
           <div class="tileBody">
             <h3 style="margin:0 0 6px; font-size:16px; font-weight:950;">High Press Trigger Game</h3>
             <p style="margin:0; color:var(--muted); font-weight:750; line-height:1.6;">
-              Press on cue (bad touch/back pass). Win it and attack within 6 seconds for double points.
+              Interventions: cue recognition (bad touch/back pass), press angles, cover shadows.
+              Scenario: win it and finish within 6 seconds.
             </p>
             <div class="meta">
               <span>Theme: Pressing</span><span>Age: U16</span><span>Level: Academy</span>
@@ -675,67 +751,7 @@ footer{
             </div>
             <div class="actions">
               <a class="btn btn-primary" href="https://designer.tactigrid.com/" target="_blank" rel="noopener noreferrer">Open in Designer</a>
-              <a class="btn btn-ghost" href="#community">Ask for Feedback</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="tile" style="--d:270ms" data-title="Build-Up Under Pressure" data-tags="build-up possession rondo" data-age="u14" data-level="academy">
-          <div class="tileTop"></div>
-          <div class="tileBody">
-            <h3 style="margin:0 0 6px; font-size:16px; font-weight:950;">Build-Up Under Pressure</h3>
-            <p style="margin:0; color:var(--muted); font-weight:750; line-height:1.6;">
-              Play out from the back with targets. Constraints encourage scanning + playing forward.
-            </p>
-            <div class="meta">
-              <span>Theme: Build-up</span><span>Age: U14</span><span>Level: Academy</span>
-            </div>
-            <div class="badges">
-              <span class="badge">Scanning</span><span class="badge">Forward play</span><span class="badge y">Constraints</span>
-            </div>
-            <div class="actions">
-              <a class="btn btn-primary" href="https://designer.tactigrid.com/" target="_blank" rel="noopener noreferrer">Open in Designer</a>
-              <a class="btn btn-ghost" href="#community">Ask for Feedback</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="tile" style="--d:360ms" data-title="4v4 Transition Waves" data-tags="transition possession finishing" data-age="adult" data-level="semi-pro">
-          <div class="tileTop"></div>
-          <div class="tileBody">
-            <h3 style="margin:0 0 6px; font-size:16px; font-weight:950;">4v4 Transition Waves</h3>
-            <p style="margin:0; color:var(--muted); font-weight:750; line-height:1.6;">
-              Continuous waves: if you lose it, you immediately counter-press. Score within 8 seconds.
-            </p>
-            <div class="meta">
-              <span>Theme: Transition</span><span>Age: Adult</span><span>Level: Semi-Pro</span>
-            </div>
-            <div class="badges">
-              <span class="badge">Intensity</span><span class="badge">Counter-press</span><span class="badge y">8-sec score</span>
-            </div>
-            <div class="actions">
-              <a class="btn btn-primary" href="https://designer.tactigrid.com/" target="_blank" rel="noopener noreferrer">Open in Designer</a>
-              <a class="btn btn-ghost" href="#community">Ask for Feedback</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="tile" style="--d:450ms" data-title="Keep-Ball + End Zone" data-tags="possession build-up decision-making" data-age="u12" data-level="grassroots">
-          <div class="tileTop"></div>
-          <div class="tileBody">
-            <h3 style="margin:0 0 6px; font-size:16px; font-weight:950;">Keep-Ball + End Zone</h3>
-            <p style="margin:0; color:var(--muted); font-weight:750; line-height:1.6;">
-              Keep possession, then break lines into the end zone. Add neutrals to create overloads.
-            </p>
-            <div class="meta">
-              <span>Theme: Possession</span><span>Age: U12</span><span>Level: Grassroots</span>
-            </div>
-            <div class="badges">
-              <span class="badge">Overloads</span><span class="badge">Breaking lines</span><span class="badge y">Neutrals</span>
-            </div>
-            <div class="actions">
-              <a class="btn btn-primary" href="https://designer.tactigrid.com/" target="_blank" rel="noopener noreferrer">Open in Designer</a>
-              <a class="btn btn-ghost" href="#community">Ask for Feedback</a>
+              <a class="btn btn-ghost" href="https://chat.whatsapp.com/LdHYZj8K7gs7zMYlyCTaS6?mode=gi_t" target="_blank" rel="noopener noreferrer">Provide Feedback</a>
             </div>
           </div>
         </article>
@@ -769,11 +785,11 @@ footer{
         </div>
 
         <div class="card" style="--d:120ms">
-          <h3>Want to add a scenario?</h3>
-          <p>Post it in the WhatsApp group and we’ll turn it into a community challenge.</p>
+          <h3>Start a challenge and build a solution</h3>
+          <p>Pick a challenge, open the designer, map your solution, then share it to the community.</p>
           <div class="hero-actions" style="margin-top:12px;">
             <a class="btn btn-ghost" href="#community">Go to Community</a>
-            <a class="btn btn-primary" href="https://designer.tactigrid.com/" target="_blank" rel="noopener noreferrer">Build a Solution Drill</a>
+            <a class="btn btn-primary" href="https://designer.tactigrid.com/" target="_blank" rel="noopener noreferrer">Open Designer</a>
           </div>
         </div>
       </div>
@@ -785,6 +801,9 @@ footer{
           <div class="badges" style="margin-top:12px;">
             <span class="badge">Build-up</span><span class="badge">Final third</span><span class="badge y">Constraints</span>
           </div>
+          <div class="actions" style="margin-top:12px;">
+            <a class="btn btn-primary" href="https://designer.tactigrid.com/" target="_blank" rel="noopener noreferrer">Start Challenge</a>
+          </div>
         </div>
 
         <div class="scenario" style="--d:90ms">
@@ -792,6 +811,9 @@ footer{
           <p>Players press at the wrong time. How do you coach triggers and compactness?</p>
           <div class="badges" style="margin-top:12px;">
             <span class="badge">Press</span><span class="badge">Compact</span><span class="badge y">Triggers</span>
+          </div>
+          <div class="actions" style="margin-top:12px;">
+            <a class="btn btn-primary" href="https://designer.tactigrid.com/" target="_blank" rel="noopener noreferrer">Start Challenge</a>
           </div>
         </div>
 
@@ -801,6 +823,9 @@ footer{
           <div class="badges" style="margin-top:12px;">
             <span class="badge">1v1</span><span class="badge">Psychology</span><span class="badge y">Competition</span>
           </div>
+          <div class="actions" style="margin-top:12px;">
+            <a class="btn btn-primary" href="https://designer.tactigrid.com/" target="_blank" rel="noopener noreferrer">Start Challenge</a>
+          </div>
         </div>
 
         <div class="scenario" style="--d:270ms">
@@ -808,6 +833,9 @@ footer{
           <p>Finishing quality drops in matches. How do you raise realism and tempo?</p>
           <div class="badges" style="margin-top:12px;">
             <span class="badge">Finishing</span><span class="badge">Tempo</span><span class="badge y">Realism</span>
+          </div>
+          <div class="actions" style="margin-top:12px;">
+            <a class="btn btn-primary" href="https://designer.tactigrid.com/" target="_blank" rel="noopener noreferrer">Start Challenge</a>
           </div>
         </div>
 
@@ -817,6 +845,9 @@ footer{
           <div class="badges" style="margin-top:12px;">
             <span class="badge">Possession</span><span class="badge">Scanning</span><span class="badge y">Forward play</span>
           </div>
+          <div class="actions" style="margin-top:12px;">
+            <a class="btn btn-primary" href="https://designer.tactigrid.com/" target="_blank" rel="noopener noreferrer">Start Challenge</a>
+          </div>
         </div>
 
         <div class="scenario" style="--d:450ms">
@@ -824,6 +855,9 @@ footer{
           <p>After losing the ball, the team switches off. How do you train counter-press?</p>
           <div class="badges" style="margin-top:12px;">
             <span class="badge">Transition</span><span class="badge">Counter-press</span><span class="badge y">Intensity</span>
+          </div>
+          <div class="actions" style="margin-top:12px;">
+            <a class="btn btn-primary" href="https://designer.tactigrid.com/" target="_blank" rel="noopener noreferrer">Start Challenge</a>
           </div>
         </div>
       </div>
@@ -863,13 +897,14 @@ footer{
         <div class="card" style="--d:120ms">
           <h3>Join the WhatsApp group</h3>
           <p>
-            When you create the WhatsApp invite link, paste it into the button below.
-            For now it’s a placeholder.
+            Tap below to join the coaching community and discuss ideas, drills, and challenges.
           </p>
 
           <div class="hero-actions" style="margin-top:12px;">
-            <!-- Replace href with your WhatsApp invite link when ready -->
-            <a class="btn btn-primary" href="#" id="whatsappBtn">
+            <a class="btn btn-primary"
+               href="https://chat.whatsapp.com/LdHYZj8K7gs7zMYlyCTaS6?mode=gi_t"
+               target="_blank"
+               rel="noopener noreferrer">
               Join WhatsApp Group
             </a>
             <a class="btn btn-ghost" href="https://designer.tactigrid.com/" target="_blank" rel="noopener noreferrer">
@@ -923,23 +958,19 @@ footer{
   }
 
   function retriggerAnimations(container){
-    // re-run fade/stagger when switching pages
     container.querySelectorAll('.fade, .stagger > *').forEach(el=>{
       el.style.animation = 'none';
-      void el.offsetHeight; // reflow
+      void el.offsetHeight;
       el.style.animation = '';
     });
   }
 
   function show(route){
     const key = pages[route] ? route : 'home';
-
     Object.values(pages).forEach(p => p.classList.remove('active'));
     pages[key].classList.add('active');
-
     setActiveNav(key);
     retriggerAnimations(pages[key]);
-
     window.scrollTo({ top: 0, behavior: 'instant' });
   }
 
@@ -950,18 +981,6 @@ footer{
 
   window.addEventListener('hashchange', routeFromHash);
   routeFromHash();
-
-  // WhatsApp placeholder
-  const whatsappBtn = document.getElementById('whatsappBtn');
-  if(whatsappBtn){
-    whatsappBtn.addEventListener('click', (e)=>{
-      const href = whatsappBtn.getAttribute('href') || '#';
-      if(href === '#'){
-        e.preventDefault();
-        alert('WhatsApp link coming soon. Replace the # with your WhatsApp invite link when ready.');
-      }
-    });
-  }
 
   // Portfolio filtering
   const feed = document.getElementById('portfolioFeed');
