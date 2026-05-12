@@ -11,25 +11,25 @@
   --yellow:#ffd400;
   --yellow2:#ffea4a;
   --text:#f2f2f2;
-  --muted: rgba(255,255,255,.74);
-  --muted2: rgba(255,255,255,.62);
-  --stroke: rgba(255,255,255,.10);
-  --stroke2: rgba(255,255,255,.07);
-  --shadow: 0 22px 60px rgba(0,0,0,.55);
-  --radius: 22px;
-  --radius2: 28px;
-  --max: 1180px;
+  --muted:rgba(255,255,255,.74);
+  --muted2:rgba(255,255,255,.62);
+  --stroke:rgba(255,255,255,.10);
+  --stroke2:rgba(255,255,255,.07);
+  --shadow:0 22px 60px rgba(0,0,0,.55);
+  --radius:22px;
+  --radius2:28px;
+  --max:1180px;
   --bg0:#050505;
   --bg1:#0c0c0c;
   --bg2:#121212;
 }
 
-*{ box-sizing:border-box; }
-html,body{ height:100%; }
+*{box-sizing:border-box;}
+html,body{height:100%;scroll-behavior:smooth;}
 
 body{
   margin:0;
-  font-family: system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
   color:var(--text);
   background:
     radial-gradient(900px 600px at 18% -10%, rgba(255,212,0,.18), transparent 60%),
@@ -38,55 +38,63 @@ body{
   overflow-x:hidden;
 }
 
-/* Smooth animations */
-@media (prefers-reduced-motion: no-preference){
-  .fade{ animation: fadeUp .65s ease both; }
-  .stagger > *{ animation: fadeUp .75s ease both; animation-delay: var(--d, 0ms); }
+@media (prefers-reduced-motion:no-preference){
+  .fade{animation:fadeUp .65s ease both;}
+  .stagger > *{
+    animation:fadeUp .75s ease both;
+    animation-delay:var(--d,0ms);
+  }
   @keyframes fadeUp{
-    from{ opacity:0; transform: translateY(16px); }
-    to{ opacity:1; transform: translateY(0); }
+    from{opacity:0;transform:translateY(16px);}
+    to{opacity:1;transform:translateY(0);}
   }
 }
 
-/* Header */
+/* ================= HEADER ================= */
 .header{
-  position:sticky; top:0; z-index:100;
-  background: rgba(0,0,0,.88);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255,255,255,.08);
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(0,0,0,.88);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(255,255,255,.08);
 }
+
 .header-inner{
-  max-width: var(--max);
-  margin: 0 auto;
-  padding: 26px 18px;
+  max-width:var(--max);
+  margin:0 auto;
+  padding:22px 18px;
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:16px;
 }
+
 .brand{
   display:flex;
   align-items:center;
   gap:12px;
-  min-width: 280px; /* slightly wider so brand feels big */
+  min-width:280px;
   text-decoration:none;
   color:inherit;
 }
 
-/* ✅ Logo bigger */
 .brand img{
-  height: 92px; /* was ~66px */
+  height:92px;
   width:auto;
   display:block;
-  filter: drop-shadow(0 12px 28px rgba(0,0,0,.45));
+  filter:drop-shadow(0 12px 28px rgba(0,0,0,.45));
 }
+
 .brand .fallback{
   display:none;
-  font-weight: 950;
-  letter-spacing:.2px;
-  font-size: 26px;
+  font-weight:950;
+  font-size:26px;
 }
-.brand .fallback span{ color: var(--yellow); }
+
+.brand .fallback span{
+  color:var(--yellow);
+}
 
 .nav{
   display:flex;
@@ -95,308 +103,306 @@ body{
   flex-wrap:wrap;
   justify-content:center;
 }
+
 .nav a{
   text-decoration:none;
-  color: rgba(255,255,255,.92);
-  font-weight: 850;
+  color:rgba(255,255,255,.92);
+  font-weight:850;
   letter-spacing:.45px;
-  font-size: 12px;
-  text-transform: uppercase;
-  padding: 10px 10px;
-  border-radius: 12px;
-  transition: background .2s ease, transform .2s ease, color .2s ease;
-  border: 1px solid transparent;
-}
-.nav a:hover{
-  background: rgba(255,255,255,.06);
-  transform: translateY(-1px);
-  color: var(--yellow2);
-}
-.nav a.active{
-  background: rgba(255,212,0,.12);
-  border-color: rgba(255,212,0,.18);
-  color: var(--yellow2);
+  font-size:12px;
+  text-transform:uppercase;
+  padding:10px 10px;
+  border-radius:12px;
+  border:1px solid transparent;
+  transition:.2s ease;
 }
 
+.nav a:hover{
+  background:rgba(255,255,255,.06);
+  color:var(--yellow2);
+  transform:translateY(-1px);
+}
+
+.nav a.active{
+  background:rgba(255,212,0,.12);
+  border-color:rgba(255,212,0,.18);
+  color:var(--yellow2);
+}
+
+/* ================= BUTTONS ================= */
 .btn{
   display:inline-flex;
   align-items:center;
   justify-content:center;
   gap:10px;
   text-decoration:none;
-  font-weight: 950;
-  letter-spacing:.2px;
-  padding: 12px 18px;
-  border-radius: 14px;
-  border: 1px solid transparent;
+  font-weight:950;
+  padding:12px 18px;
+  border-radius:14px;
+  border:1px solid transparent;
   cursor:pointer;
-  transition: transform .2s ease, filter .2s ease, box-shadow .2s ease, background .2s ease;
-  user-select:none;
   white-space:nowrap;
+  transition:.2s ease;
 }
+
+.btn:hover{
+  transform:translateY(-2px);
+}
+
 .btn-primary{
-  background: var(--yellow);
+  background:var(--yellow);
   color:#0a0a0a;
-  box-shadow: 0 18px 45px rgba(255,212,0,.18), 0 18px 45px rgba(0,0,0,.45);
+  box-shadow:
+    0 18px 45px rgba(255,212,0,.18),
+    0 18px 45px rgba(0,0,0,.45);
 }
-.btn-primary:hover{ transform: translateY(-2px); filter: brightness(1.03); }
+
 .btn-ghost{
-  background: rgba(255,255,255,.06);
-  color: var(--text);
-  border-color: rgba(255,255,255,.10);
-  box-shadow: none;
+  background:rgba(255,255,255,.06);
+  color:var(--text);
+  border-color:rgba(255,255,255,.10);
 }
-.btn-ghost:hover{ transform: translateY(-2px); background: rgba(255,255,255,.08); }
 
+.btn-ghost:hover{
+  background:rgba(255,255,255,.08);
+}
+
+/* ================= LAYOUT ================= */
 .wrap{
-  max-width: var(--max);
-  margin: 0 auto;
-  padding: 0 18px 80px;
+  max-width:var(--max);
+  margin:0 auto;
+  padding:0 18px 80px;
 }
 
-/* Pages (SPA sections) */
-.page{ display:none; }
-.page.active{ display:block; }
+.page{display:none;}
+.page.active{display:block;}
 
-/* Shared blocks */
-.section{ margin-top: 28px; }
-.title-row{ display:flex; align-items:center; gap:14px; margin: 0 0 14px; }
-.line{ height:2px; flex:1; background: rgba(255,255,255,.12); }
+.section{
+  margin-top:28px;
+}
+
+.title-row{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin:0 0 14px;
+}
+
+.line{
+  height:2px;
+  flex:1;
+  background:rgba(255,255,255,.12);
+}
+
 .title{
   margin:0;
-  font-size: 13px;
-  font-weight: 950;
+  font-size:13px;
+  font-weight:950;
   letter-spacing:.85px;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.88);
+  text-transform:uppercase;
+  color:rgba(255,255,255,.88);
 }
-.title .accent{ color: var(--yellow); }
 
-.card{
-  border-radius: var(--radius);
-  border: 1px solid rgba(255,255,255,.10);
-  background: rgba(255,255,255,.05);
-  box-shadow: 0 16px 40px rgba(0,0,0,.35);
-  padding: 18px 18px;
+.title .accent{
+  color:var(--yellow);
 }
+  .card{
+  border-radius:var(--radius);
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.05);
+  box-shadow:0 16px 40px rgba(0,0,0,.35);
+  padding:22px;
+}
+
 .card h3{
-  margin:0 0 8px;
-  font-size: 16px;
-  font-weight: 950;
+  margin:0 0 10px;
+  font-size:18px;
+  font-weight:950;
   letter-spacing:.2px;
 }
+
 .card p{
   margin:0;
-  color: var(--muted);
-  font-weight: 700;
-  line-height: 1.6;
+  color:var(--muted);
+  font-weight:700;
+  line-height:1.7;
 }
+
 .grid-2{
   display:grid;
-  grid-template-columns: 1.05fr .95fr;
-  gap: 18px;
+  grid-template-columns:1.05fr .95fr;
+  gap:18px;
 }
+
 .grid-3{
   display:grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
 }
+
 .list{
-  margin: 10px 0 0;
-  padding-left: 18px;
-  color: rgba(255,255,255,.80);
-  font-weight: 750;
-  line-height: 1.7;
+  margin:12px 0 0;
+  padding-left:18px;
+  color:rgba(255,255,255,.80);
+  font-weight:750;
+  line-height:1.8;
 }
-.badges{ display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+
+.badges{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:12px;
+}
+
 .badge{
   display:inline-flex;
   align-items:center;
-  gap:8px;
-  padding: 7px 10px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 900;
-  letter-spacing:.2px;
-  background: rgba(255,255,255,.06);
-  border: 1px solid rgba(255,255,255,.10);
-  color: rgba(255,255,255,.86);
-}
-.badge.y{
-  background: rgba(255,212,0,.14);
-  border-color: rgba(255,212,0,.22);
-  color: var(--yellow2);
+  padding:7px 10px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:900;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.10);
+  color:rgba(255,255,255,.86);
 }
 
-/* Home hero */
+.badge.y{
+  background:rgba(255,212,0,.14);
+  border-color:rgba(255,212,0,.22);
+  color:var(--yellow2);
+}
+
+/* ================= HERO ================= */
 .hero{
-  margin-top: 18px;
-  border-radius: var(--radius2);
+  margin-top:18px;
+  border-radius:var(--radius2);
   overflow:hidden;
-  border: 1px solid rgba(255,255,255,.08);
-  box-shadow: var(--shadow);
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:var(--shadow);
   background:
     linear-gradient(0deg, rgba(0,0,0,.72), rgba(0,0,0,.25)),
     radial-gradient(900px 450px at 80% 10%, rgba(255,212,0,.14), transparent 60%),
     url("football_training.width-640.jpg");
-  background-size: cover;
-  background-position: center;
+  background-size:cover;
+  background-position:center;
 }
+
 .hero-inner{
-  padding: 62px 46px;
-  min-height: 380px;
+  padding:72px 46px;
+  min-height:480px;
   display:flex;
   align-items:center;
 }
-.hero-content{ max-width: 680px; }
+
+.hero-content{
+  max-width:720px;
+}
+
 .hero h1{
-  margin:0 0 10px;
-  font-size: clamp(30px, 3.3vw, 52px);
-  font-weight: 950;
-  letter-spacing:.2px;
-  line-height:1.06;
-  text-transform: uppercase;
+  margin:0 0 14px;
+  font-size:clamp(34px, 4vw, 64px);
+  font-weight:950;
+  line-height:1.04;
+  text-transform:uppercase;
 }
+
 .hero p{
-  margin:0 0 18px;
-  color: rgba(255,255,255,.86);
-  font-weight: 750;
-  line-height:1.55;
-  font-size: 16px;
-}
-.hero-actions{ display:flex; gap:12px; flex-wrap:wrap; }
-
-/* Feature strip */
-.features{
-  display:grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-  padding: 18px 0;
-  border-top: 1px solid rgba(255,255,255,.08);
-  border-bottom: 1px solid rgba(255,255,255,.08);
-}
-.feature{
-  text-align:center;
-  padding: 10px 10px;
-  font-weight: 900;
-  color: rgba(255,255,255,.92);
-}
-.feature small{
-  display:block;
-  margin-top:8px;
-  color: rgba(255,255,255,.65);
-  font-weight: 750;
+  margin:0 0 24px;
+  font-size:18px;
+  color:rgba(255,255,255,.86);
+  line-height:1.7;
+  font-weight:750;
 }
 
-/* Portfolios feed */
-.toolbar{
+.hero-actions{
   display:flex;
   gap:12px;
   flex-wrap:wrap;
-  align-items:center;
-  justify-content:space-between;
-  margin-top: 14px;
 }
-.search{
-  flex: 1 1 260px;
-  display:flex;
-  gap:10px;
-  align-items:center;
-  background: rgba(255,255,255,.06);
-  border: 1px solid rgba(255,255,255,.10);
-  border-radius: 14px;
-  padding: 10px 12px;
-}
-.search input{
-  width:100%;
-  background: transparent;
-  border:0;
-  outline:none;
-  color: var(--text);
-  font-weight: 800;
-  letter-spacing:.2px;
-}
-.filters{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-}
-.select{
-  background: rgba(255,255,255,.06);
-  border: 1px solid rgba(255,255,255,.10);
-  color: rgba(255,255,255,.90);
-  border-radius: 14px;
-  padding: 10px 12px;
-  font-weight: 900;
-  letter-spacing:.2px;
-  outline:none;
-}
-.feed{
-  margin-top: 14px;
-  display:grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-}
-.tile{
-  border-radius: var(--radius);
-  border: 1px solid rgba(255,255,255,.10);
-  background: rgba(0,0,0,.22);
-  overflow:hidden;
-  box-shadow: 0 16px 40px rgba(0,0,0,.35);
-}
-.tileTop{
-  height: 120px;
-  background:
-    radial-gradient(420px 160px at 20% 10%, rgba(255,212,0,.18), transparent 60%),
-    linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-  border-bottom: 1px solid rgba(255,255,255,.08);
-}
-.tileBody{ padding: 14px 14px 16px; }
-.meta{
-  display:flex; gap:10px; flex-wrap:wrap;
-  color: rgba(255,255,255,.68);
-  font-weight: 850;
-  font-size: 12px;
-  letter-spacing:.2px;
-  margin-top: 10px;
-}
-.actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 12px; }
 
-/* Challenge cards */
-.scenarios{
-  margin-top: 14px;
+.hero-stats{
   display:grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  margin-top:28px;
 }
-.scenario{
-  border-radius: var(--radius);
-  border: 1px solid rgba(255,255,255,.10);
-  background: rgba(0,0,0,.22);
-  padding: 16px;
-}
-.scenario h3{ margin:0 0 8px; font-size: 16px; font-weight: 950; }
-.scenario p{ margin:0; color: var(--muted); font-weight: 750; line-height: 1.6; }
 
-/* Footer */
-footer{
-  margin-top: 44px;
-  padding: 30px 0 40px;
-  border-top: 1px solid rgba(255,255,255,.08);
-  color: rgba(255,255,255,.60);
+.stat{
+  padding:16px;
+  border-radius:16px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.08);
+  backdrop-filter:blur(8px);
+}
+
+.stat strong{
+  display:block;
+  font-size:26px;
+  font-weight:950;
+  color:var(--yellow2);
+}
+
+.stat span{
+  display:block;
+  margin-top:4px;
+  font-size:13px;
+  font-weight:800;
+  color:rgba(255,255,255,.70);
+  text-transform:uppercase;
+  letter-spacing:.4px;
+}
+
+/* ================= FEATURE STRIP ================= */
+.features{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+  padding:18px 0;
+  border-top:1px solid rgba(255,255,255,.08);
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.feature{
   text-align:center;
-  font-weight: 700;
+  padding:10px;
+  font-weight:900;
+  color:rgba(255,255,255,.92);
 }
 
-@media (max-width: 980px){
-  .nav{ display:none; }
-  .hero-inner{ padding: 42px 18px; }
-  .features{ grid-template-columns: 1fr; }
-  .grid-2{ grid-template-columns: 1fr; }
-  .grid-3{ grid-template-columns: 1fr; }
-  .feed{ grid-template-columns: 1fr; }
-  .scenarios{ grid-template-columns: 1fr; }
-  .brand img{ height: 72px; } /* still bigger on mobile */
+.feature small{
+  display:block;
+  margin-top:8px;
+  color:rgba(255,255,255,.65);
+  font-weight:750;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width:980px){
+  .nav{display:none;}
+  .grid-2,
+  .grid-3,
+  .features,
+  .hero-stats{
+    grid-template-columns:1fr;
+  }
+
+  .hero-inner{
+    padding:42px 18px;
+    min-height:auto;
+  }
+
+  .hero h1{
+    font-size:clamp(30px, 9vw, 48px);
+  }
+
+  .hero p{
+    font-size:16px;
+  }
+
+  .brand img{
+    height:72px;
+  }
 }
 </style>
 </head>
@@ -406,7 +412,8 @@ footer{
 <header class="header">
   <div class="header-inner fade">
     <a class="brand" href="#home" aria-label="TactiGrid">
-      <img src="tactigrid-logo.png" alt="TactiGrid Logo"
+      <img src="tactigrid-logo.png"
+           alt="TactiGrid Logo"
            onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
       <div class="fallback">Tacti<span>Grid</span></div>
     </a>
@@ -429,598 +436,377 @@ footer{
 
 <main class="wrap">
 
-  <!-- HOME -->
-  <section class="page active" id="page-home">
-    <section class="hero fade">
-      <div class="hero-inner">
-        <div class="hero-content">
-          <h1>Plan Faster. Coach Smarter.</h1>
-          <p>
-            Build professional football sessions in minutes — then share your drills with a community that can
-            give feedback directly on your designs.
-          </p>
+<!-- ================= HOME ================= -->
+<section class="page active" id="page-home">
 
-          <div class="hero-actions">
-            <a class="btn btn-primary"
-               href="https://designer.tactigrid.com/"
-               target="_blank"
-               rel="noopener noreferrer">
-              Launch Drill Designer
-            </a>
-
-            <a class="btn btn-ghost" href="#community">Join the Community</a>
-            <a class="btn btn-ghost" href="#portfolios">Explore Portfolios</a>
-          </div>
-
-          <div class="badges" style="margin-top:14px;">
-            <span class="badge y">Free demo</span>
-            <span class="badge">Built with coaches</span>
-            <span class="badge">Feedback-driven updates</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section fade">
-      <div class="title-row">
-        <div class="line"></div>
-        <h3 class="title">Why Coaches Choose <span class="accent">TactiGrid</span></h3>
-        <div class="line"></div>
-      </div>
-
-      <div class="features stagger">
-        <div class="feature" style="--d:0ms">
-          Visual Session Design
-          <small>Drag, drop, build quickly</small>
-        </div>
-        <div class="feature" style="--d:90ms">
-          Portfolios & Templates
-          <small>Build your own library</small>
-        </div>
-        <div class="feature" style="--d:180ms">
-          Feedback From Coaches
-          <small>Improve drills with the network</small>
-        </div>
-      </div>
-
-      <div class="grid-2 stagger" style="margin-top:18px;">
-        <div class="card" style="--d:0ms">
-          <h3>Turn drills into a shareable portfolio</h3>
-          <p>
-            Publish drills with tags (age group, theme, objective) so you build a reusable library.
-            Coaches can browse portfolios and steal ideas that fit their environment.
-          </p>
-          <ul class="list">
-            <li>U7–U18 tags, grassroots to academy</li>
-            <li>Theme tags: finishing, 1v1, build-up, press, transitions</li>
-            <li>Progressions + coaching points saved with each drill</li>
-          </ul>
-        </div>
-
-        <div class="card" style="--d:120ms">
-          <h3>Get feedback directly on your drills</h3>
-          <p>
-            Share a drill link in the community, ask “What would you change?” and get practical suggestions:
-            constraints, scoring rules, progressions, and coaching cues.
-          </p>
-          <ul class="list">
-            <li>Faster improvement through peer review</li>
-            <li>More confidence delivering sessions</li>
-            <li>Stronger sessions with less planning time</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- ✅ ABOUT US (added) -->
-    <section class="section fade">
-      <div class="title-row">
-        <div class="line"></div>
-        <h3 class="title">About <span class="accent">Us</span></h3>
-        <div class="line"></div>
-      </div>
-
-      <div class="grid-2 stagger">
-        <div class="card" style="--d:0ms">
-          <h3>Why TactiGrid exists</h3>
-          <p>
-            TactiGrid was built to link coaches together and create a real community around session design.
-            When I entered the sector, I found it surprisingly difficult to find the right coaching network —
-            the niche people, the right contacts, and a place to ask questions without feeling lost.
-          </p>
-          <p style="margin-top:12px;">
-            I studied a degree in the game and wanted to reach out to coaches, learn from their experiences,
-            and build my journey properly — but there wasn’t a clear space to do that.
-            Now it’s here: a place to design, share, learn, and improve together.
-          </p>
-        </div>
-
-        <div class="card" style="--d:120ms">
-          <h3>What we’re building</h3>
-          <p>
-            A living library of drills and session ideas — powered by coach portfolios and real feedback from the network.
-            The aim is simple: make planning easier, raise session quality, and help coaches improve faster.
-          </p>
-          <ul class="list">
-            <li>Build drills visually in the designer</li>
-            <li>Share them to the community for feedback</li>
-            <li>Publish your best work into your portfolio</li>
-          </ul>
-          <div class="badges" style="margin-top:12px;">
-            <span class="badge y">Community-first</span>
-            <span class="badge">Coach-led</span>
-            <span class="badge">Always improving</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section fade">
-      <div class="title-row">
-        <div class="line"></div>
-        <h3 class="title">How It Works</h3>
-        <div class="line"></div>
-      </div>
-
-      <div class="grid-3 stagger">
-        <div class="card" style="--d:0ms">
-          <h3>1) Build</h3>
-          <p>Create a drill visually in the designer.</p>
-          <div class="badges"><span class="badge">Pitch layout</span><span class="badge">Movements</span></div>
-        </div>
-        <div class="card" style="--d:90ms">
-          <h3>2) Share</h3>
-          <p>Drop your drill link in the community for feedback.</p>
-          <div class="badges"><span class="badge">WhatsApp</span><span class="badge">Coach network</span></div>
-        </div>
-        <div class="card" style="--d:180ms">
-          <h3>3) Improve</h3>
-          <p>Apply the best suggestions and save it to your portfolio.</p>
-          <div class="badges"><span class="badge y">Better sessions</span><span class="badge">Reusable</span></div>
-        </div>
-      </div>
-
-      <div class="card" style="margin-top:18px;">
-        <h3>Ready to build your next session?</h3>
-        <p>Launch the designer, create one drill, and share it to the community for feedback.</p>
-        <div class="hero-actions" style="margin-top:12px;">
-          <a class="btn btn-primary" href="https://designer.tactigrid.com/" target="_blank" rel="noopener noreferrer">Open Drill Designer</a>
-          <a class="btn btn-ghost" href="#community">Post to Community</a>
-          <a class="btn btn-ghost" href="#portfolios">Browse Portfolios</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ✅ CONTACT US button at bottom of HOME -->
-    <section class="section fade" id="contact">
-      <div class="title-row">
-        <div class="line"></div>
-        <h3 class="title">Contact <span class="accent">Us</span></h3>
-        <div class="line"></div>
-      </div>
-
-      <div class="card">
-        <h3>Want help, feedback, or to submit a drill?</h3>
+  <section class="hero fade">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <h1>Build Better Football Sessions.</h1>
         <p>
-          Join the WhatsApp community and message us — drills shared there can be added into the Portfolios section as the library grows.
+          Design professional drills in minutes, organise them into your own portfolio,
+          and get feedback from coaches around the world.
         </p>
 
-        <div class="hero-actions" style="margin-top:12px;">
+        <div class="hero-actions">
           <a class="btn btn-primary"
-             href="https://chat.whatsapp.com/LdHYZj8K7gs7zMYlyCTaS6?mode=gi_t"
+             href="https://designer.tactigrid.com/"
              target="_blank"
              rel="noopener noreferrer">
-            Contact Us
+            Launch Drill Designer
           </a>
-          <a class="btn btn-ghost" href="#community">Community Page</a>
+
+          <a class="btn btn-ghost" href="#community">
+            Join the Community
+          </a>
+
+          <a class="btn btn-ghost" href="#portfolios">
+            Explore Portfolios
+          </a>
+        </div>
+
+        <div class="badges" style="margin-top:18px;">
+          <span class="badge y">Free Demo</span>
+          <span class="badge">Coach-Built</span>
+          <span class="badge">Community Driven</span>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat">
+            <strong>3 Steps</strong>
+            <span>Build • Share • Improve</span>
+          </div>
+
+          <div class="stat">
+            <strong>24/7</strong>
+            <span>Access Anywhere</span>
+          </div>
+
+          <div class="stat">
+            <strong>100%</strong>
+            <span>Designed for Coaches</span>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
+    <section class="section fade">
+    <div class="title-row">
+      <div class="line"></div>
+      <h3 class="title">Why Coaches Choose <span class="accent">TactiGrid</span></h3>
+      <div class="line"></div>
+    </div>
 
-    <footer>© 2026 TactiGrid — Built for Modern Coaches</footer>
+    <div class="features stagger">
+      <div class="feature" style="--d:0ms">
+        Visual Session Design
+        <small>Drag, drop and build in minutes</small>
+      </div>
+      <div class="feature" style="--d:90ms">
+        Personal Portfolios
+        <small>Create your own drill library</small>
+      </div>
+      <div class="feature" style="--d:180ms">
+        Coach Feedback
+        <small>Improve sessions with real input</small>
+      </div>
+    </div>
+
+    <div class="grid-2 stagger" style="margin-top:18px;">
+      <div class="card" style="--d:0ms">
+        <h3>Turn Every Drill Into a Reusable Asset</h3>
+        <p>
+          Save your best practices into a structured portfolio with tags, coaching
+          points, and progressions so planning gets faster every week.
+        </p>
+        <ul class="list">
+          <li>Age-group filters from U7 to Adult</li>
+          <li>Themes like Finishing, Pressing and Transitions</li>
+          <li>Coaching points and progressions saved forever</li>
+        </ul>
+      </div>
+
+      <div class="card" style="--d:120ms">
+        <h3>Receive Practical Feedback</h3>
+        <p>
+          Share your drill and ask the community what they would change.
+          Get actionable suggestions you can use in your next session.
+        </p>
+        <ul class="list">
+          <li>Constraints and scoring ideas</li>
+          <li>Progressions and regressions</li>
+          <li>Coaching cues and interventions</li>
+        </ul>
+      </div>
+    </div>
   </section>
 
-  <!-- PORTFOLIOS -->
-  <section class="page" id="page-portfolios">
-    <section class="section fade" style="margin-top:18px;">
-      <div class="title-row">
-        <div class="line"></div>
-        <h3 class="title">Community <span class="accent">Portfolios</span></h3>
-        <div class="line"></div>
+  <section class="section fade">
+    <div class="title-row">
+      <div class="line"></div>
+      <h3 class="title">About <span class="accent">TactiGrid</span></h3>
+      <div class="line"></div>
+    </div>
+
+    <div class="grid-2 stagger">
+      <div class="card" style="--d:0ms">
+        <h3>Built by a Coach, for Coaches</h3>
+        <p>
+          TactiGrid was created to solve a common problem: finding a place where
+          coaches can design sessions, share ideas and connect with others who are
+          genuinely passionate about development.
+        </p>
+        <p style="margin-top:12px;">
+          After studying the game and recognising the importance of tactical and
+          performance analysis, the vision became clear — create a platform that
+          helps coaches learn together and improve faster.
+        </p>
       </div>
 
-      <div class="grid-2 stagger">
-        <div class="card" style="--d:0ms">
-          <h3>Coach drills will appear here</h3>
-          <p>
-            Drills created by coaches (including yours) and drills submitted in the WhatsApp chat will appear here
-            as the library grows. When you upload and share them with me, I’ll categorise them properly:
-            age, level, theme, and notes on interventions/scenarios.
-          </p>
-          <ul class="list">
-            <li>Filter by theme, age group, and level</li>
-            <li>Open in the designer to export and use</li>
-            <li>Provide feedback via the community</li>
-          </ul>
-        </div>
-
-        <div class="card" style="--d:120ms">
-          <h3>Submit a drill</h3>
-          <p>Build one drill, then share it in the WhatsApp group — we’ll grow the portfolio library from there.</p>
-          <div class="hero-actions" style="margin-top:12px;">
-            <a class="btn btn-primary" href="https://designer.tactigrid.com/" target="_blank" rel="noopener noreferrer">Create a Drill</a>
-            <a class="btn btn-ghost" href="https://chat.whatsapp.com/LdHYZj8K7gs7zMYlyCTaS6?mode=gi_t" target="_blank" rel="noopener noreferrer">Contact / Submit</a>
-          </div>
+      <div class="card" style="--d:120ms">
+        <h3>Our Mission</h3>
+        <p>
+          To build the go-to platform for football coaches to design, collaborate,
+          receive feedback and store their best session ideas in one place.
+        </p>
+        <div class="badges">
+          <span class="badge y">Community First</span>
+          <span class="badge">Coach Led</span>
+          <span class="badge">Always Improving</span>
         </div>
       </div>
-
-      <div class="toolbar fade" style="margin-top:18px;">
-        <div class="search" aria-label="Search drills">
-          <span style="opacity:.7;font-weight:950;">Search</span>
-          <input id="q" type="text" placeholder="e.g. finishing, press, 1v1, rondo…" />
-        </div>
-
-        <div class="filters">
-          <select id="theme" class="select" aria-label="Theme">
-            <option value="">Theme: All</option>
-            <option value="finishing">Finishing</option>
-            <option value="1v1">1v1</option>
-            <option value="pressing">Pressing</option>
-            <option value="build-up">Build-up</option>
-            <option value="possession">Possession</option>
-            <option value="transition">Transition</option>
-          </select>
-
-          <select id="age" class="select" aria-label="Age group">
-            <option value="">Age: All</option>
-            <option value="u9">U9</option>
-            <option value="u12">U12</option>
-            <option value="u14">U14</option>
-            <option value="u16">U16</option>
-            <option value="adult">Adult</option>
-          </select>
-
-          <select id="level" class="select" aria-label="Level">
-            <option value="">Level: All</option>
-            <option value="grassroots">Grassroots</option>
-            <option value="academy">Academy</option>
-            <option value="semi-pro">Semi-Pro</option>
-          </select>
-        </div>
-
-        <div style="color:rgba(255,255,255,.70); font-weight:900;" id="resultCount">—</div>
-      </div>
-
-      <!-- Demo drills (placeholders until you provide real links) -->
-      <div class="feed stagger" id="portfolioFeed" style="margin-top:14px;">
-        <article class="tile" style="--d:0ms" data-title="Quick Finish + Rebound" data-tags="finishing transition shooting" data-age="u12" data-level="grassroots">
-          <div class="tileTop"></div>
-          <div class="tileBody">
-            <h3 style="margin:0 0 6px; font-size:16px; font-weight:950;">Quick Finish + Rebound</h3>
-            <p style="margin:0; color:var(--muted); font-weight:750; line-height:1.6;">
-              Interventions: body shape to finish, first touch out of feet, scan before shot.
-              Scenario: quick rebound reaction after save/deflection.
-            </p>
-            <div class="meta">
-              <span>Theme: Finishing</span><span>Age: U12</span><span>Level: Grassroots</span>
-            </div>
-            <div class="badges">
-              <span class="badge">Shooting</span><span class="badge">Reactions</span><span class="badge y">High tempo</span>
-            </div>
-            <div class="actions">
-              <a class="btn btn-primary" href="https://designer.tactigrid.com/" target="_blank" rel="noopener noreferrer">Open in Designer</a>
-              <a class="btn btn-ghost" href="https://chat.whatsapp.com/LdHYZj8K7gs7zMYlyCTaS6?mode=gi_t" target="_blank" rel="noopener noreferrer">Provide Feedback</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="tile" style="--d:90ms" data-title="1v1 Gate Attack" data-tags="1v1 dribbling duels" data-age="u9" data-level="grassroots">
-          <div class="tileTop"></div>
-          <div class="tileBody">
-            <h3 style="margin:0 0 6px; font-size:16px; font-weight:950;">1v1 Gate Attack</h3>
-            <p style="margin:0; color:var(--muted); font-weight:750; line-height:1.6;">
-              Interventions: change of speed, disguise, body feints, protect the ball.
-              Scenario: attacker must beat defender then finish through a gate.
-            </p>
-            <div class="meta">
-              <span>Theme: 1v1</span><span>Age: U9</span><span>Level: Grassroots</span>
-            </div>
-            <div class="badges">
-              <span class="badge">Duels</span><span class="badge">Change of speed</span><span class="badge y">Competitive</span>
-            </div>
-            <div class="actions">
-              <a class="btn btn-primary" href="https://designer.tactigrid.com/" target="_blank" rel="noopener noreferrer">Open in Designer</a>
-              <a class="btn btn-ghost" href="https://chat.whatsapp.com/LdHYZj8K7gs7zMYlyCTaS6?mode=gi_t" target="_blank" rel="noopener noreferrer">Provide Feedback</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="tile" style="--d:180ms" data-title="High Press Trigger Game" data-tags="pressing transition counter-press" data-age="u16" data-level="academy">
-          <div class="tileTop"></div>
-          <div class="tileBody">
-            <h3 style="margin:0 0 6px; font-size:16px; font-weight:950;">High Press Trigger Game</h3>
-            <p style="margin:0; color:var(--muted); font-weight:750; line-height:1.6;">
-              Interventions: cue recognition (bad touch/back pass), press angles, cover shadows.
-              Scenario: win it and finish within 6 seconds.
-            </p>
-            <div class="meta">
-              <span>Theme: Pressing</span><span>Age: U16</span><span>Level: Academy</span>
-            </div>
-            <div class="badges">
-              <span class="badge">Triggers</span><span class="badge">Counter-press</span><span class="badge y">6-second rule</span>
-            </div>
-            <div class="actions">
-              <a class="btn btn-primary" href="https://designer.tactigrid.com/" target="_blank" rel="noopener noreferrer">Open in Designer</a>
-              <a class="btn btn-ghost" href="https://chat.whatsapp.com/LdHYZj8K7gs7zMYlyCTaS6?mode=gi_t" target="_blank" rel="noopener noreferrer">Provide Feedback</a>
-            </div>
-          </div>
-        </article>
-      </div>
-
-      <footer>© 2026 TactiGrid — Built for Modern Coaches</footer>
-    </section>
+    </div>
   </section>
 
-  <!-- CHALLENGE -->
-  <section class="page" id="page-challenge">
-    <section class="section fade" style="margin-top:18px;">
-      <div class="title-row">
-        <div class="line"></div>
-        <h3 class="title"><span class="accent">Challenge</span> Scenarios</h3>
-        <div class="line"></div>
+  <section class="section fade">
+    <div class="title-row">
+      <div class="line"></div>
+      <h3 class="title">How It Works</h3>
+      <div class="line"></div>
+    </div>
+
+    <div class="grid-3 stagger">
+      <div class="card" style="--d:0ms">
+        <h3>1. Build</h3>
+        <p>Create a professional drill visually using the designer.</p>
       </div>
 
-      <div class="grid-2 stagger">
-        <div class="card" style="--d:0ms">
-          <h3>Sharpen your coaching decisions</h3>
-          <p>
-            Challenges are “real-life coaching problems” where the community shares solutions and drill ideas.
-            The best answers become templates inside portfolios.
-          </p>
-          <ul class="list">
-            <li>Progressions and constraints that actually work</li>
-            <li>Coaching cues for common session problems</li>
-            <li>Community-driven templates you can reuse</li>
-          </ul>
-        </div>
-
-        <div class="card" style="--d:120ms">
-          <h3>Start a challenge and build a solution</h3>
-          <p>Pick a challenge, open the designer, map your solution, then share it to the community.</p>
-          <div class="hero-actions" style="margin-top:12px;">
-            <a class="btn btn-ghost" href="#community">Go to Community</a>
-            <a class="btn btn-primary" href="https://designer.tactigrid.com/" target="_blank" rel="noopener noreferrer">Open Designer</a>
-          </div>
-        </div>
+      <div class="card" style="--d:90ms">
+        <h3>2. Share</h3>
+        <p>Post your drill in the community and ask for feedback.</p>
       </div>
 
-      <div class="scenarios stagger">
-        <div class="scenario" style="--d:0ms">
-          <h3>Breaking a Low Block</h3>
-          <p>Your team dominates possession but can’t create chances. What constraints help?</p>
-          <div class="badges" style="margin-top:12px;">
-            <span class="badge">Build-up</span><span class="badge">Final third</span><span class="badge y">Constraints</span>
-          </div>
-          <div class="actions" style="margin-top:12px;">
-            <a class="btn btn-primary" href="https://designer.tactigrid.com/" target="_blank" rel="noopener noreferrer">Start Challenge</a>
-          </div>
-        </div>
-
-        <div class="scenario" style="--d:90ms">
-          <h3>Pressing Triggers</h3>
-          <p>Players press at the wrong time. How do you coach triggers and compactness?</p>
-          <div class="badges" style="margin-top:12px;">
-            <span class="badge">Press</span><span class="badge">Compact</span><span class="badge y">Triggers</span>
-          </div>
-          <div class="actions" style="margin-top:12px;">
-            <a class="btn btn-primary" href="https://designer.tactigrid.com/" target="_blank" rel="noopener noreferrer">Start Challenge</a>
-          </div>
-        </div>
-
-        <div class="scenario" style="--d:180ms">
-          <h3>Improving 1v1 Confidence</h3>
-          <p>Wingers avoid taking players on. What competitive game design helps?</p>
-          <div class="badges" style="margin-top:12px;">
-            <span class="badge">1v1</span><span class="badge">Psychology</span><span class="badge y">Competition</span>
-          </div>
-          <div class="actions" style="margin-top:12px;">
-            <a class="btn btn-primary" href="https://designer.tactigrid.com/" target="_blank" rel="noopener noreferrer">Start Challenge</a>
-          </div>
-        </div>
-
-        <div class="scenario" style="--d:270ms">
-          <h3>Finishing Under Pressure</h3>
-          <p>Finishing quality drops in matches. How do you raise realism and tempo?</p>
-          <div class="badges" style="margin-top:12px;">
-            <span class="badge">Finishing</span><span class="badge">Tempo</span><span class="badge y">Realism</span>
-          </div>
-          <div class="actions" style="margin-top:12px;">
-            <a class="btn btn-primary" href="https://designer.tactigrid.com/" target="_blank" rel="noopener noreferrer">Start Challenge</a>
-          </div>
-        </div>
-
-        <div class="scenario" style="--d:360ms">
-          <h3>Playing Forward</h3>
-          <p>Players recycle sideways. What constraints encourage vertical passing?</p>
-          <div class="badges" style="margin-top:12px;">
-            <span class="badge">Possession</span><span class="badge">Scanning</span><span class="badge y">Forward play</span>
-          </div>
-          <div class="actions" style="margin-top:12px;">
-            <a class="btn btn-primary" href="https://designer.tactigrid.com/" target="_blank" rel="noopener noreferrer">Start Challenge</a>
-          </div>
-        </div>
-
-        <div class="scenario" style="--d:450ms">
-          <h3>Transitions</h3>
-          <p>After losing the ball, the team switches off. How do you train counter-press?</p>
-          <div class="badges" style="margin-top:12px;">
-            <span class="badge">Transition</span><span class="badge">Counter-press</span><span class="badge y">Intensity</span>
-          </div>
-          <div class="actions" style="margin-top:12px;">
-            <a class="btn btn-primary" href="https://designer.tactigrid.com/" target="_blank" rel="noopener noreferrer">Start Challenge</a>
-          </div>
-        </div>
+      <div class="card" style="--d:180ms">
+        <h3>3. Improve</h3>
+        <p>Apply the best ideas and save the final version to your portfolio.</p>
       </div>
+    </div>
 
-      <footer>© 2026 TactiGrid — Built for Modern Coaches</footer>
-    </section>
+    <div class="card" style="margin-top:18px;">
+      <h3>Ready to Build Your Next Session?</h3>
+      <p>
+        Launch the designer, create your first drill and share it with the
+        community to start improving immediately.
+      </p>
+
+      <div class="hero-actions" style="margin-top:12px;">
+        <a class="btn btn-primary"
+           href="https://designer.tactigrid.com/"
+           target="_blank"
+           rel="noopener noreferrer">
+          Open Drill Designer
+        </a>
+
+        <a class="btn btn-ghost" href="#community">
+          Join Community
+        </a>
+      </div>
+    </div>
   </section>
 
-  <!-- COMMUNITY -->
-  <section class="page" id="page-community">
-    <section class="section fade" style="margin-top:18px;">
-      <div class="title-row">
-        <div class="line"></div>
-        <h3 class="title"><span class="accent">Community</span> Network</h3>
-        <div class="line"></div>
+  <section class="section fade" id="contact">
+    <div class="title-row">
+      <div class="line"></div>
+      <h3 class="title">Contact <span class="accent">Us</span></h3>
+      <div class="line"></div>
+    </div>
+
+    <div class="card">
+      <h3>Need Help or Want to Submit a Drill?</h3>
+      <p>
+        Join the WhatsApp community to ask questions, receive support and submit
+        your drills to be featured in the growing portfolio library.
+      </p>
+
+      <div class="hero-actions" style="margin-top:12px;">
+        <a class="btn btn-primary"
+           href="https://chat.whatsapp.com/LdHYZj8K7gs7zMYlyCTaS6?mode=gi_t"
+           target="_blank"
+           rel="noopener noreferrer">
+          Contact Us
+        </a>
+
+        <a class="btn btn-ghost" href="#community">
+          Community Page
+        </a>
       </div>
-
-      <div class="grid-2 stagger">
-        <div class="card" style="--d:0ms">
-          <h3>What the community is for</h3>
-          <p>
-            This is where coaches help coaches. Share a drill link, ask for feedback, swap progressions,
-            and get advice on real session problems.
-          </p>
-          <ul class="list">
-            <li>Post your drill link + your objective</li>
-            <li>Get suggestions: constraints, scoring rules, progressions</li>
-            <li>Discover drills other coaches are using this week</li>
-          </ul>
-          <div class="badges">
-            <span class="badge y">Feedback</span>
-            <span class="badge">Ideas</span>
-            <span class="badge">Support</span>
-          </div>
-        </div>
-
-        <div class="card" style="--d:120ms">
-          <h3>Join the WhatsApp group</h3>
-          <p>
-            Tap below to join the coaching community and discuss ideas, drills, and challenges.
-          </p>
-
-          <div class="hero-actions" style="margin-top:12px;">
-            <a class="btn btn-primary"
-               href="https://chat.whatsapp.com/LdHYZj8K7gs7zMYlyCTaS6?mode=gi_t"
-               target="_blank"
-               rel="noopener noreferrer">
-              Join WhatsApp Group
-            </a>
-            <a class="btn btn-ghost" href="https://designer.tactigrid.com/" target="_blank" rel="noopener noreferrer">
-              Build a Drill to Share
-            </a>
-          </div>
-
-          <p style="margin-top:12px; color: var(--muted2); font-weight:800;">
-            Tip: post your drill link + “What would you change?” and you’ll get fast feedback.
-          </p>
-        </div>
-      </div>
-
-      <div class="grid-3 stagger" style="margin-top:18px;">
-        <div class="card" style="--d:0ms">
-          <h3>How to post a drill</h3>
-          <p>1) Build → 2) Export/share link → 3) Post in WhatsApp with your objective.</p>
-        </div>
-        <div class="card" style="--d:90ms">
-          <h3>What to ask for</h3>
-          <p>Progression ideas, constraints, scoring rules, organisation tweaks, coaching cues.</p>
-        </div>
-        <div class="card" style="--d:180ms">
-          <h3>Community standards</h3>
-          <p>Be constructive, be specific, and share practical solutions coaches can use next session.</p>
-        </div>
-      </div>
-
-      <footer>© 2026 TactiGrid — Built for Modern Coaches</footer>
-    </section>
+    </div>
   </section>
 
-</main>
-
+  <footer>© 2026 TactiGrid — Built for Modern Coaches</footer>
+</section>
 <script>
-/* ========= SPA routing + portfolio filtering ========= */
+/* ========= SPA Routing + Portfolio Filtering ========= */
 (function(){
   const pages = {
     home: document.getElementById('page-home'),
     portfolios: document.getElementById('page-portfolios'),
     challenge: document.getElementById('page-challenge'),
-    community: document.getElementById('page-community'),
+    community: document.getElementById('page-community')
   };
 
-  const navLinks = Array.from(document.querySelectorAll('.nav a[data-route]'));
+  const navLinks = Array.from(
+    document.querySelectorAll('.nav a[data-route]')
+  );
 
+  /* ------------------------------
+     Set active navigation state
+  ------------------------------ */
   function setActiveNav(route){
-    navLinks.forEach(a=>{
-      a.classList.toggle('active', a.dataset.route === route);
+    navLinks.forEach(link => {
+      link.classList.toggle(
+        'active',
+        link.dataset.route === route
+      );
     });
   }
 
+  /* ------------------------------
+     Re-trigger fade animations
+  ------------------------------ */
   function retriggerAnimations(container){
-    container.querySelectorAll('.fade, .stagger > *').forEach(el=>{
+    if(!container) return;
+
+    container.querySelectorAll('.fade, .stagger > *').forEach(el => {
       el.style.animation = 'none';
-      void el.offsetHeight;
+      void el.offsetHeight; /* force reflow */
       el.style.animation = '';
     });
   }
 
+  /* ------------------------------
+     Show selected SPA page
+  ------------------------------ */
   function show(route){
     const key = pages[route] ? route : 'home';
-    Object.values(pages).forEach(p => p.classList.remove('active'));
-    pages[key].classList.add('active');
-    setActiveNav(key);
-    retriggerAnimations(pages[key]);
-    window.scrollTo({ top: 0, behavior: 'instant' });
+
+    Object.values(pages).forEach(page => {
+      if(page) page.classList.remove('active');
+    });
+
+    if(pages[key]){
+      pages[key].classList.add('active');
+      setActiveNav(key);
+      retriggerAnimations(pages[key]);
+    }
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'instant'
+    });
   }
 
+  /* ------------------------------
+     Hash routing
+  ------------------------------ */
   function routeFromHash(){
-    const hash = (location.hash || '#home').replace('#','').trim().toLowerCase();
+    const hash = (location.hash || '#home')
+      .replace('#', '')
+      .trim()
+      .toLowerCase();
+
     show(hash);
   }
 
   window.addEventListener('hashchange', routeFromHash);
   routeFromHash();
 
-  // Portfolio filtering
+  /* ==================================================
+     PORTFOLIO FILTERING
+  ================================================== */
   const feed = document.getElementById('portfolioFeed');
+
   if(feed){
     const q = document.getElementById('q');
     const theme = document.getElementById('theme');
     const age = document.getElementById('age');
     const level = document.getElementById('level');
+    const count = document.getElementById('resultCount');
 
-    function norm(s){ return (s||'').toLowerCase().trim(); }
-
-    function apply(){
-      const query = norm(q?.value);
-      const t = norm(theme?.value);
-      const a = norm(age?.value);
-      const l = norm(level?.value);
-
-      let shown = 0;
-      feed.querySelectorAll('[data-title]').forEach(card=>{
-        const title = norm(card.dataset.title);
-        const tags = norm(card.dataset.tags);
-        const cAge = norm(card.dataset.age);
-        const cLevel = norm(card.dataset.level);
-
-        const hitQuery = !query || title.includes(query) || tags.includes(query);
-        const hitTheme = !t || tags.includes(t);
-        const hitAge = !a || cAge === a;
-        const hitLevel = !l || cLevel === l;
-
-        const showCard = hitQuery && hitTheme && hitAge && hitLevel;
-        card.style.display = showCard ? '' : 'none';
-        if(showCard) shown++;
-      });
-
-      const count = document.getElementById('resultCount');
-      if(count) count.textContent = `${shown} drill${shown===1?'':'s'} shown`;
+    function norm(value){
+      return (value || '').toLowerCase().trim();
     }
 
-    [q, theme, age, level].forEach(el=> el && el.addEventListener('input', apply));
-    apply();
+    function applyFilters(){
+      const query = norm(q && q.value);
+      const selectedTheme = norm(theme && theme.value);
+      const selectedAge = norm(age && age.value);
+      const selectedLevel = norm(level && level.value);
+
+      let shown = 0;
+
+      feed.querySelectorAll('[data-title]').forEach(card => {
+        const title = norm(card.dataset.title);
+        const tags = norm(card.dataset.tags);
+        const cardAge = norm(card.dataset.age);
+        const cardLevel = norm(card.dataset.level);
+
+        const matchesQuery =
+          !query ||
+          title.includes(query) ||
+          tags.includes(query);
+
+        const matchesTheme =
+          !selectedTheme ||
+          tags.includes(selectedTheme);
+
+        const matchesAge =
+          !selectedAge ||
+          cardAge === selectedAge;
+
+        const matchesLevel =
+          !selectedLevel ||
+          cardLevel === selectedLevel;
+
+        const shouldShow =
+          matchesQuery &&
+          matchesTheme &&
+          matchesAge &&
+          matchesLevel;
+
+        card.style.display = shouldShow ? '' : 'none';
+
+        if(shouldShow){
+          shown++;
+        }
+      });
+
+      if(count){
+        count.textContent =
+          shown === 0
+            ? 'No drills found'
+            : `${shown} drill${shown === 1 ? '' : 's'} shown`;
+      }
+    }
+
+    [q, theme, age, level].forEach(el => {
+      if(!el) return;
+
+      el.addEventListener('input', applyFilters);
+      el.addEventListener('change', applyFilters);
+    });
+
+    applyFilters();
   }
 })();
 </script>
